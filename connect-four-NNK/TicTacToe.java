@@ -22,12 +22,12 @@ public class TicTacToe
             playerOne = input.next();
             System.out.println("Enter Player two's name");
             playerTwo = input.next();
-            System.out.println("Tic-Tac-Toe:" + playerOne + " vs "+ playerTwo);
+            System.out.println("Connect-Four:" + playerOne + " vs "+ playerTwo);
 
-            char[][] board = new char[3][3];
-            for(int i=0; i<3;i++){
-                for (int k=0; k<3;k++){
-                    board[i][k]='-';
+            char[][] board = new char[6][7];
+            for(int row=0; row<6;row++){
+                for (int col=0; col<7;col++){
+                    board[row][col]='-';
                 }
             }
 
@@ -37,50 +37,38 @@ public class TicTacToe
                 drawBoard(board);
                 char symbol = ' ';
                 if (playerOneTurn) {
-                    symbol = 'o';
+                    symbol = 'B';
                 } else {
-                    symbol = 'x';
+                    symbol = 'R';
                 }
 
                 if (playerOneTurn) {
-                    System.out.println(playerOne + "'s turn (x)");
+                    System.out.println(playerOne + "'s turn (B)");
                 } else {
-                    System.out.println(playerTwo + "'s turn (o)");
+                    System.out.println(playerTwo + "'s turn (R)");
                 }
-
-                int row = 0;
-                int column = 0;
-
+                int columnMove = input.nextInt()-1;
                 while (true) {
-                    System.out.println("Select on vertical axis (1, 2, or 3): ");
-                    row = input.nextInt()-1;
-                    System.out.println("Select on horizontal axis (1, 2, or 3): ");
-                    column = input.nextInt()-1;
-
-                    //Row and Column authenticator
-                    if (row < 0 || column < 0 || row > 2 || column > 2) {
-                        System.out.println("Out of bounds");
-                    } else if (board[row][column] != '-') {
-                        System.out.println("Spot already selected");
-                    } else {
-                        break;
-                    }
+                    System.out.println("Select a column (1-6)");
+                    isColFull(board, input, symbol, playerOneTurn);
+                    break;
                 }
-                board[row][column] = symbol;
-
-                if (hasWon(board) == 'x') {
-                    System.out.println(playerOne + " has won!");
-                    gameEnded = true;
-                } else if (hasWon(board) == 'o') {
-                    System.out.println(playerTwo + " has won!");
-                    gameEnded = true;
-                }else{
-                    if (hasTied(board)) {
-                        System.out.println("You guys have tied");
+                for (int row = 0; row < 6; row++ ) {
+                    if (hasWon(board) == 'B') {
+                        System.out.println(playerOne + " has won!");
                         gameEnded = true;
-                    } else {
-                        playerOneTurn = !playerOneTurn;
+                    } else if (hasWon(board) == 'R') {
+                        System.out.println(playerTwo + " has won!");
+                        gameEnded = true;
+                    }else{
+                        if (hasTied(board)) {
+                            System.out.println("You guys have tied");
+                            gameEnded = true;
+                        } else {
+                            playerOneTurn = !playerOneTurn;
+                        }
                     }
+
                 }
             }
             drawBoard(board);
@@ -88,22 +76,21 @@ public class TicTacToe
             System.out.println("If you want to play again, type Yes, else type No");
             if (input.next().equals("Yes")) {
                 playAgain = true;
+            } else if (input.next().equals("No")) {
+                playAgain = false;
+                gameEnded = true;
             } else {
-                if (input.next().equals("No")) {
-                    playAgain = false;
-                    gameEnded = true;
-                } else {
-                    gameEnded = true;
-                }
-
+                playAgain = false;
+                gameEnded = true;
             }
+
         }
     }
 
     public static void drawBoard(char[][] board) {
-        for(int i=0; i<3;i++){
-            for (int k=0; k<3;k++){
-                System.out.print(board[i][k]);
+        for(int row=0; row<6;row++){
+            for (int col=0; col<7;col++){
+                System.out.print(board[row][col]);
             }
             System.out.println();
         }
@@ -133,15 +120,36 @@ public class TicTacToe
     }
 
     public static boolean hasTied(char[][] board) {
-        for (int i = 0; i < 3; i++) {
-            for (int k = 0; k < 3; k++) {
-                if (board[i][k] == '-') {
+        for (int row = 0; row < 6; row++) {
+            for (int col = 0; col < 7; col++) {
+                if (board[row][col] == '-') {
                     return false;
                 }
             }
         }
         return true;
     }
-}
 
+    public static char isColFull(char[][] board, Scanner input, char symbol, boolean playerOneTurn){
+        // which column did player pick?
+        int columnMove = input.nextInt()-1;
+        // check if top row is filled up
+        if (columnMove < 1 || columnMove > 7) {
+            System.out.println("Please select a valid column");
+        } else {
+            int row = 5;
+            if (board[columnMove][row] == '-') {
+                if (playerOneTurn) {
+                    symbol = 'B';
+                } else if (!playerOneTurn){
+                    symbol = 'R';
+                }
+            } else if (board[columnMove][row] != '-') {
+                row--;
+            }
+            board[row][columnMove] = symbol;
+        }
+        return symbol;
+    }
+}
 
