@@ -1,10 +1,10 @@
 #BlueJ class context
 comment0.target=connectFour
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ connectFour\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\n\ Write\ a\ description\ of\ class\ connectFour\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
 comment10.params=
-comment10.target=boolean\ CheckODiagonal()
+comment10.target=boolean\ checkLeftDiagonal()
 comment11.params=
 comment11.target=boolean\ checkP1()
 comment12.params=
@@ -26,5 +26,5 @@ comment7.target=boolean\ placePiece(int)
 comment8.params=
 comment8.target=boolean\ checkHorizontalVertical()
 comment9.params=
-comment9.target=boolean\ CheckHDiagonal()
+comment9.target=boolean\ checkRightDiagonal()
 numComments=14

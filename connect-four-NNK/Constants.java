@@ -8,7 +8,7 @@
 public class Constants
 {
     public final static int BOARD_ROW = 6;
-    public final static int BOARD_COL = 6;
+    public final static int BOARD_COL = 7;
     public final static int BOARD_LOW = BOARD_ROW - 1;
     
     public final static char P2_COLOR = 'R';
