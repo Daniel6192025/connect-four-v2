@@ -50,9 +50,9 @@ public class Player
 
     public String toString() {
         switch (this.color) {
-            case Constants.PLAYER_1:
+            case Constants.P1_COLOR:
                 return this.getPlayerName() + " (BLUE)";
-            case Constants.PLAYER_2:
+            case Constants.P2_COLOR:
                 return this.getPlayerName()  + " (RED)";
             default:
                 return this.getPlayerName() + " (?????)";

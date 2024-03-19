@@ -11,7 +11,7 @@ public class Constants
     public final static int BOARD_COL = 6;
     public final static int BOARD_LOW = BOARD_ROW - 1;
     
-    public final static char PLAYER_2 = 'R';
-    public final static char PLAYER_1 = 'B';
+    public final static char P2_COLOR = 'R';
+    public final static char P1_COLOR = 'B';
     public final static char EMPTY = '.';
 }

@@ -24,8 +24,8 @@ public class connectFour
         String p1 = scanner.next();
         String p2 = scanner.next();
         
-        Player player1 = new Player(p1, 'B');
-        Player player2 = new Player(p2, 'R');        
+        Player player1 = new Player(p1, Constants.P1_COLOR);
+        Player player2 = new Player(p2, Constants.P2_COLOR);        
 
         connectFour play = new connectFour(player1, player2);
         play.run();
@@ -113,10 +113,10 @@ public class connectFour
         while(flag){
 
             //goes through board vertically
-            for(int row= 0; Constants.BOARD_ROW > row; row += 1){
-                for(int col = 0; Constants.BOARD_COL > col; col += 1){
+            for(int col = 0; col < Constants.BOARD_COL; col ++){
+                for(int row = 0; row < Constants.BOARD_ROW; row ++){
                     if((board[col][row] == 'B')){ 
-                        counter += 1;
+                        counter++;
                     }else if(board[col][row]=='R'){
                         up++; 
                     }else{
@@ -124,30 +124,25 @@ public class connectFour
                         up=0;
                     }
                     if((counter >= 4)|(up>=4)){
-                        System.out.println("Player"+ "wins"); 
                         flag = false;
                     }
                 }
             }
-            break;
-        }
-        while(flag){
-
-            for(int row = 0; Constants.BOARD_ROW > row; row ++){
-                for(int col = 0; Constants.BOARD_COL > col; col ++){
+            for(int col = 0; col < Constants.BOARD_COL; col ++){
+                for(int row = 0; row < Constants.BOARD_ROW; row ++){
                     if((board[col][row] == 'B')|(board[col][row]=='R')){ 
-                        counter += 1;
+                        counter++;
                     }else{
                         counter = 0; 
                     }
                     if(counter >= 4){
-                        System.out.println("Player"+" wins"); 
                         flag = false;
                     }
                 }
             }
             break;
         }
+        
         return flag;
     }
 
